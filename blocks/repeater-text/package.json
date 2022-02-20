@@ -1,0 +1,22 @@
+{
+    "name": "repeatertext",
+    "version": "1.0.0",
+    "main": "build/index.js",
+    "author": "akzhy",
+    "license": "MIT",
+    "scripts": {
+      "dev": "wp-scripts start",
+      "build": "wp-scripts build"
+    },
+    "devDependencies": {
+        "@wordpress/block-editor": "^5.3.0",
+        "@wordpress/components": "^13.0.0",
+        "@wordpress/element": "^2.20.0",
+        "@wordpress/scripts": "^14.0.1"
+      },
+      "dependencies": {
+        "dequal": "^2.0.2",
+        "styled-components": "^5.3.3"
+      }
+  }
+  

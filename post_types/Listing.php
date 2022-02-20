@@ -4,7 +4,7 @@ class Listing
   function __construct()
   {
     add_action('init', [$this, 'register'], 0);
-    add_action('save_post_gallery', [$this, 'save']);
+    add_action('save_post_listing', [$this, 'save']);
     add_action('graphql_register_types', [$this, 'init_graphql']);
   }
 

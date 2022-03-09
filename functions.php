@@ -16,6 +16,7 @@ if (!function_exists('write_log')) {
 
 require_once __DIR__ . "./post_types/Listing.php";
 require_once __DIR__ . "./post_types/SiteSettings.php";
+require_once __DIR__ . "./post_types/Agents.php";
 require_once __DIR__ . "./blocks/gallery/index.php";
 require_once __DIR__ . "./blocks/repeater-text/index.php";
 require_once __DIR__ . "./helpers/ImageHandling.php";
@@ -27,6 +28,7 @@ new RepeaterText(["listing"], "Other Properties");
 
 new SiteSettings();
 new Listing();
+new Agents();
 
 
 new ImageHandling();

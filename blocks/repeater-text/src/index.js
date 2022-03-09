@@ -14,8 +14,11 @@ const App = () => {
     const list = items.map((item, i) => (
         <Row
             addNew={() => setItems((p) => [...p, { key: "", value: "" }])}
+            removeRow={() => setItems((p) => p.filter((_, index) => index !== i))}
             dataKey={item.key || ""}
             dataValue={item.value || ""}
+            showDelete={items.length > 1}
+            showAddNew={i === items.length - 1}
             onChange={(key, value) => {
                 setItems((p) => {
                     return p.map((c, ci) => {
@@ -45,7 +48,7 @@ const App = () => {
 
             <input
                 type="hidden"
-                name="_repeater_text"
+                name="_repeater_text_data"
                 value={JSON.stringify(items)}
             />
         </div>

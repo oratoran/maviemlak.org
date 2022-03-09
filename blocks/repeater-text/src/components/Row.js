@@ -22,10 +22,19 @@ const RowContainer = styled.div`
     button {
         background: transparent;
         border: none;
+        cursor: pointer;
     }
 `;
 
-export const Row = ({ dataKey, dataValue, onChange, addNew }) => {
+export const Row = ({
+    dataKey,
+    dataValue,
+    onChange,
+    addNew,
+    showDelete,
+    removeRow,
+    showAddNew,
+}) => {
     return (
         <RowContainer>
             <div className="item">
@@ -44,10 +53,17 @@ export const Row = ({ dataKey, dataValue, onChange, addNew }) => {
                     onChange={(e) => onChange("value", e.currentTarget.value)}
                 />
             </div>
-            <button onClick={addNew}>
-                <Dashicon icon="plus" />
-                Add new Row
-            </button>
+            {showDelete && (
+                <button onClick={removeRow} title="Delete">
+                    <Dashicon icon="trash" />
+                </button>
+            )}
+            {showAddNew && (
+                <button onClick={addNew}>
+                    <Dashicon icon="plus" />
+                    Add new Row
+                </button>
+            )}
         </RowContainer>
     );
 };

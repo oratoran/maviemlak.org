@@ -90,6 +90,35 @@ class Listing
         }
       ]
     );
+
+    register_graphql_object_type('OtherPropertyField', [
+      'description' => '',
+      'fields' => [
+        'key' => [
+          'type' => 'String'
+        ],
+        'value' => [
+          'type' => 'String'
+        ]
+      ]
+    ]);
+
+    register_graphql_field(
+      'Listing',
+      'otherProperties',
+      [
+        'description' => "Other Properties",
+        'type'        => ['list_of' => 'OtherPropertyField'],
+        'resolve'     => function ($root, $args, $context) {
+          $data = json_decode(get_post_meta($root->ID, '_repeater_text_data', true));
+          if (json_last_error() === JSON_ERROR_NONE) {
+            return $data;
+          } else {
+            return [];
+          }
+        }
+      ]
+    );
   }
 
 

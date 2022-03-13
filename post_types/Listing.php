@@ -6,6 +6,7 @@ class Listing
     add_action('init', [$this, 'register'], 0);
     add_action('save_post_listing', [$this, 'save']);
     add_action('graphql_register_types', [$this, 'init_graphql']);
+    add_filter('graphql_post_object_connection_query_args', [$this, 'register_custom_graphql_where'], 10, 5);
   }
 
   function register()
@@ -119,6 +120,27 @@ class Listing
         }
       ]
     );
+
+    register_graphql_field('RootQueryToListingConnectionWhereArgs', 'propertyType', [
+      'type' => 'String',
+    ]);
+  }
+
+  function register_custom_graphql_where($query_args, $source, $args, $context, $info)
+  {
+    $propertyType = $args['where']['propertyType'];
+
+    if (isset($propertyType)) {
+      $query_args['meta_query'] = [
+        [
+          'key' => 'propertyType',
+          'value' => $propertyType,
+          'compare' => '='
+        ]
+      ];
+    }
+
+    return $query_args;
   }
 
 

@@ -124,6 +124,10 @@ class Listing
     register_graphql_field('RootQueryToListingConnectionWhereArgs', 'propertyType', [
       'type' => 'String',
     ]);
+
+    register_graphql_field('RootQueryToListingConnectionWhereArgs', 'location', [
+      'type' => 'String',
+    ]);
   }
 
   function register_custom_graphql_where($query_args, $source, $args, $context, $info)
@@ -138,6 +142,29 @@ class Listing
           'compare' => '='
         ]
       ];
+    }
+
+    $location = $args['where']['location'];
+
+    if (isset($location)) {
+      $post = get_page_by_path($location, OBJECT, 'locations');
+      if ($post) {
+        $query_args['meta_query'] = [
+          [
+            'key' => 'location',
+            'value' => $post->ID,
+            'compare' => '='
+          ]
+        ];
+      } else {
+        $query_args['meta_query'] = [
+          [
+            'key' => 'location',
+            'value' => '############',
+            'compare' => '='
+          ]
+        ];
+      }
     }
 
     return $query_args;
